@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, KDSegmentedControlDelegate {
     
     
     // MARK: - UIViewLifeCycle Methods -
@@ -23,7 +23,15 @@ class ViewController: UIViewController {
         segmentedControl.backgroundColor = .gray
         segmentedControl.dropShadow = true
         segmentedControl.selectedIndex = -1
+        segmentedControl.delegate = self
         view.addSubview(segmentedControl)
+    }
+    
+    
+    // MARK: - KDSegmentedControlDelegate Methods -
+    
+    func didSelectItem(atIndex index: Int, item: String) {
+        print("didSelectItem(atIndex index: \(index), item: \(item)")
     }
 
 

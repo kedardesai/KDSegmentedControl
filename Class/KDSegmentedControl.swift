@@ -8,6 +8,16 @@
 
 import UIKit
 
+protocol KDSegmentedControlDelegate {
+    func didSelectItem(atIndex index: Int, item: String)
+}
+
+extension KDSegmentedControlDelegate {
+    func didSelectItem(atIndex index: Int, item: String) {
+        /* just leaving empty so that there wont be any compile error */
+    }
+}
+
 @IBDesignable class KDSegmentedControl: UIControl {
     
     
@@ -48,6 +58,8 @@ import UIKit
              displayNewSelectedIndex()
         }
     }
+    
+    open var delegate: KDSegmentedControlDelegate? = nil
     
     
     /// Init Methods -
@@ -187,6 +199,9 @@ import UIKit
         if calculatedIndex != -1 {
             selectedIndex = calculatedIndex
             sendActions(for: .valueChanged)
+            if delegate != nil {
+                delegate!.didSelectItem(atIndex: selectedIndex, item: items[selectedIndex])
+            }
         }
         
         return false
