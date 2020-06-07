@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
 	s.license = 'MIT'
 	s.name = 'KDSegmentedControl'
 	s.summary = 'An elegant, animated and customizable segmented control for iOS created by Kedar Desai.'
-	s.version = '1.0'
+	s.version = '1.1'
 	s.author = { "Kedar Desai" => "kedar.dwl@gmail.com" }
 	s.homepage = "https://github.com/kedardesai/KDSegmentedControl"
 	s.framework = "UIKit"
