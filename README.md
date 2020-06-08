@@ -13,6 +13,7 @@ A customizable segmented control for iOS swift version 4.0 and plus created by k
 
 
 ## Requirements
+* iOS 10.0
 * swift 4.0
 
 ## Installation
