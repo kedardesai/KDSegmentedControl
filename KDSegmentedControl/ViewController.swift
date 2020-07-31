@@ -17,14 +17,16 @@ class ViewController: UIViewController, KDSegmentedControlDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let segmentedControl: KDSegmentedControl = KDSegmentedControl(frame: CGRect(x: 20.0, y: 100.0, width: view.bounds.width - 40.0, height: 50.0))
-        segmentedControl.items = ["AM", "PM"]
-        segmentedControl.thumbColor = .green
-        segmentedControl.backgroundColor = .gray
-        segmentedControl.dropShadow = true
-        segmentedControl.selectedIndex = -1
-        segmentedControl.delegate = self
-        view.addSubview(segmentedControl)
+        let segmentControl: KDSegmentedControl = KDSegmentedControl(frame: CGRect(x: 20.0, y: 100.0, width: view.bounds.width - 40.0, height: 50.0))
+        segmentControl.items = ["Item 1", "Item 2", "Item 3"]
+        segmentControl.dropShadow = true
+        segmentControl.thumbColor = .green
+        segmentControl.cornerRadius = 10.0
+        segmentControl.selectedIndex = -1
+        segmentControl.backgroundColor = .lightGray
+        segmentControl.delegate = self
+        view.addSubview(segmentControl)
+
     }
     
     
