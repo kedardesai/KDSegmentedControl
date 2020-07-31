@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol KDSegmentedControlDelegate {
+public protocol KDSegmentedControlDelegate {
     func didSelectItem(atIndex index: Int, item: String)
 }
 
@@ -18,25 +18,25 @@ extension KDSegmentedControlDelegate {
     }
 }
 
-@IBDesignable class KDSegmentedControl: UIControl {
+@IBDesignable public class KDSegmentedControl: UIControl {
     
     
     /// IBInspectable variables
     
-    @IBInspectable open var defaultTextFont: UIFont = UIFont.systemFont(ofSize: 12.0)
-    @IBInspectable open var selectedTextFont: UIFont = UIFont.systemFont(ofSize: 12.0)
-    @IBInspectable open var defaultTextColor: UIColor = UIColor.black
-    @IBInspectable open var selectedTextColor: UIColor = UIColor.white
+    @IBInspectable public var defaultTextFont: UIFont = UIFont.systemFont(ofSize: 12.0)
+    @IBInspectable public var selectedTextFont: UIFont = UIFont.systemFont(ofSize: 12.0)
+    @IBInspectable public var defaultTextColor: UIColor = UIColor.black
+    @IBInspectable public var selectedTextColor: UIColor = UIColor.white
     
-    @IBInspectable open var thumbColor: UIColor = UIColor.clear
-    @IBInspectable open var thumbShadowColor: UIColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
-    @IBInspectable open var dropShadow:Bool = true
+    @IBInspectable public var thumbColor: UIColor = UIColor.clear
+    @IBInspectable public var thumbShadowColor: UIColor = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
+    @IBInspectable public var dropShadow:Bool = true
     
-    @IBInspectable open var cornerRadius: CGFloat = 0 // for rounded corner radius use negative value, 0 to disable
-    @IBInspectable open var borderColor: UIColor = UIColor.white
-    @IBInspectable open var borderWidth: CGFloat = 0.0
+    @IBInspectable public var cornerRadius: CGFloat = 0 // for rounded corner radius use negative value, 0 to disable
+    @IBInspectable public var borderColor: UIColor = UIColor.white
+    @IBInspectable public var borderWidth: CGFloat = 0.0
     
-    @IBInspectable open var padding: CGFloat = 5.0
+    @IBInspectable public var padding: CGFloat = 5.0
     
     
     /// Private variables that can not be used by developers.
@@ -45,26 +45,26 @@ extension KDSegmentedControlDelegate {
     fileprivate var itemLabels: [UILabel] = []
     
     
-    /// Open variables that can be called by developers from outside the class.
+    /// public variables that can be called by developers from outside the class.
     
-    open var items: [String] = ["Item 1", "Item 1", "Item 1"] {
+    public var items: [String] = ["Item 1", "Item 1", "Item 1"] {
         didSet {
             setupLabels()
         }
     }
     
-    open var selectedIndex: Int = 0 {
+    public var selectedIndex: Int = 0 {
         didSet {
              displayNewSelectedIndex()
         }
     }
     
-    open var delegate: KDSegmentedControlDelegate? = nil
+    public var delegate: KDSegmentedControlDelegate? = nil
     
     
     /// Init Methods -
     
-    open override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
     }
     
@@ -76,7 +76,7 @@ extension KDSegmentedControlDelegate {
         super.init(coder: aDecoder)
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         
         // 1. Set up view
@@ -93,8 +93,8 @@ extension KDSegmentedControlDelegate {
             label.frame = CGRect(x: xPos, y: 0.0, width: newWidth, height: frame.height)
         }
         
-        // 4. Set thumbView's frame
-        thumbView.frame = CGRect(x: 0, y: 0, width: newWidth, height: frame.height)
+        // 4. Display selected index
+        displayNewSelectedIndex()
         
     }
     
@@ -133,8 +133,8 @@ extension KDSegmentedControlDelegate {
     
     fileprivate func setupThumbView() {
         
-        
         thumbView.backgroundColor = thumbColor
+        thumbView.layer.cornerRadius = cornerRadius < 0 ? 0.5 * thumbView.frame.size.height : cornerRadius
         
         if dropShadow == true {
             thumbView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0);
@@ -170,7 +170,7 @@ extension KDSegmentedControlDelegate {
             label.font = selectedTextFont
             
             // 3. Change thumbView's frame
-            thumbView.frame = label.frame
+            thumbView.frame = CGRect(x: label.frame.origin.x + padding, y: label.frame.origin.y + padding, width: label.frame.size.width - (padding * 2), height: label.frame.size.height - (padding * 2))
             
             // 4. Add thumbView if it is not added already
             if !thumbView.isDescendant(of: self) {
@@ -186,7 +186,7 @@ extension KDSegmentedControlDelegate {
     
     /// Touch Event Methods -
     
-    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let location = touch.location(in: self)
         
         var calculatedIndex : Int = -1
